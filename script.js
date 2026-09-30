@@ -63,6 +63,7 @@ function calcularTotal() {
 }
 
 function exportarPDF() {
+    
     if (!validarCliente()) {
         return;
     }
@@ -75,8 +76,7 @@ function exportarPDF() {
     const cliente =
         document.getElementById("cliente").value;
      const fecha =
-        document.getElementById("fechaEmision")
-        .innerText;
+        document.getElementById("fechaEmision").innerText;
 
     doc.setFontSize(18);
     doc.text("PRESUPUESTO", 80, 20);
