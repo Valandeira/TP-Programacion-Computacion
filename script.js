@@ -1,23 +1,5 @@
-function actualizarFechaHora() {
-
-    const ahora = new Date();
-
-    const fechaHora =
-        ahora.toLocaleDateString('es-AR') +
-        " " +
-        ahora.toLocaleTimeString('es-AR');
-
-    document.getElementById("fechaEmision").innerText =
-        fechaHora;
-}
-
-actualizarFechaHora();
-setInterval(actualizarFechaHora, 1000);
-
 function calcularTotal() {
- if (!validarCliente()) {
-        return;
-    }
+
     let subtotal = 0;
 
     const filas = document.querySelectorAll("#tablaProductos tr");
@@ -64,10 +46,6 @@ function calcularTotal() {
 
 function exportarPDF() {
 
-        if (!validarCliente()) {
-        return;
-    }
-    
     calcularTotal();
 
     const { jsPDF } = window.jspdf;
@@ -82,9 +60,8 @@ function exportarPDF() {
 
     doc.setFontSize(12);
     doc.text("Cliente: " + cliente, 10, 40);
-    doc.text("Fecha de Emisión": " + fecha, 10, 50);
 
-    let y = 75;
+    let y = 60;
 
     const filas = document.querySelectorAll("#tablaProductos tr");
 
@@ -136,32 +113,4 @@ function exportarPDF() {
     );
 
     doc.save("Presupuesto.pdf");
-}
-function validarCliente() {
-
-    const cliente =
-        document.getElementById("cliente")
-        .value
-        .trim();
-
-    const palabras =
-        cliente.split(/\s+/);
-
-    if (cliente === "") {
-
-        alert("Debe ingresar Nombre y Apellido");
-
-        return false;
-    }
-
-    if (palabras.length < 2) {
-
-        alert(
-            "Ingrese al menos Nombre y Apellido"
-        );
-
-        return false;
-    }
-
-    return true;
 }
