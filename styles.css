@@ -27,6 +27,12 @@ h1{
     margin-bottom:30px;
 }
 
+.fecha{
+    margin-bottom:20px;
+    font-size:18px;
+    font-weight:bold;
+}
+
 .cliente label{
     font-size:20px;
     margin-right:10px;
