@@ -83,11 +83,7 @@ function exportarPDF() {
 
     doc.setFontSize(12);
     doc.text("Cliente: " + cliente, 10, 40);
-    doc.text(
-    "Fecha de Emisión: " + fecha,
-    10,
-    50
-);
+    doc.text("Fecha de Emisión: " + fecha,10,50);
 
     let y = 75;
 
