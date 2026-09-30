@@ -63,10 +63,7 @@ function calcularTotal() {
 }
 
 function exportarPDF() {
-    
-    if (!validarCliente()) {
-        return;
-    }
+
     calcularTotal();
 
     const { jsPDF } = window.jspdf;
@@ -75,17 +72,14 @@ function exportarPDF() {
 
     const cliente =
         document.getElementById("cliente").value;
-     const fecha =
-        document.getElementById("fechaEmision").innerText;
 
     doc.setFontSize(18);
     doc.text("PRESUPUESTO", 80, 20);
 
     doc.setFontSize(12);
     doc.text("Cliente: " + cliente, 10, 40);
-    doc.text("Fecha de Emisión: " + fecha,10,50);
 
-    let y = 75;
+    let y = 60;
 
     const filas = document.querySelectorAll("#tablaProductos tr");
 
