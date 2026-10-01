@@ -1,81 +1,112 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    background:#f0f0f0;
-    padding:30px;
+body {
+    background: #f2f2f2;
+    font-family: Arial, sans-serif;
+    padding: 30px;
 }
 
-.contenedor{
-    max-width:1200px;
-    margin:auto;
-    background:white;
-    padding:30px;
-    border:2px solid #ccc;
+.contenedor {
+    background: white;
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px;
+    border: 2px solid #cccccc;
 }
 
-h1{
-    text-align:center;
-    margin-bottom:30px;
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-.cliente{
-    margin-bottom:30px;
+.datos {
+    margin-bottom: 30px;
 }
 
-.cliente label{
-    font-size:20px;
-    margin-right:10px;
+.cliente {
+    margin-bottom: 15px;
 }
 
-.cliente input{
-    width:350px;
-    padding:10px;
+.cliente label,
+.fecha label {
+    font-weight: bold;
+    margin-right: 10px;
 }
 
-table{
-    width:100%;
-    border-collapse:collapse;
+.cliente input {
+    width: 350px;
+    padding: 10px;
 }
 
-th{
-    padding:15px;
-    font-size:20px;
+.fecha {
+    font-size: 16px;
 }
 
-td{
-    padding:10px;
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-input, select{
-    width:100%;
-    padding:10px;
+th {
+    padding: 15px;
+    font-size: 18px;
 }
 
-.resumen{
-    margin-top:40px;
-    display:flex;
-    justify-content:space-between;
+td {
+    padding: 10px;
 }
 
-.cuotas p,
-.totales p{
-    margin:15px 0;
-    font-size:20px;
+input,
+select {
+    width: 100%;
+    padding: 10px;
 }
 
-.botones{
-    margin-top:40px;
-    display:flex;
-    gap:20px;
+.resumen {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
 }
 
-button{
-    padding:12px 25px;
-    cursor:pointer;
-    font-size:18px;
+.planes,
+.totales {
+    width: 45%;
+}
+
+.planes p,
+.totales p {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.botones {
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+}
+
+button {
+    padding: 12px 25px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+@media print {
+
+    .botones {
+        display: none;
+    }
+
+    body {
+        padding: 0;
+        background: white;
+    }
+
+    .contenedor {
+        border: none;
+    }
 }
