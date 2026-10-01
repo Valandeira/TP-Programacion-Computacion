@@ -1,26 +1,86 @@
+const IVA = 0.21;
+
+function actualizarFechaHora() {
+
+    const ahora = new Date();
+
+    document.getElementById("fechaEmision").textContent =
+        ahora.toLocaleDateString("es-AR") +
+        " " +
+        ahora.toLocaleTimeString("es-AR");
+}
+
+setInterval(actualizarFechaHora, 1000);
+actualizarFechaHora();
+
+function validarCliente() {
+
+    const cliente =
+        document.getElementById("cliente")
+        .value
+        .trim();
+
+    const palabras = cliente.split(/\s+/);
+
+    if (cliente === "") {
+
+        alert("Debe ingresar Nombre y Apellido.");
+        return false;
+    }
+
+    if (palabras.length < 2) {
+
+        alert("Ingrese al menos Nombre y Apellido.");
+        return false;
+    }
+
+    return true;
+}
+
+function formatoMoneda(valor) {
+
+    return valor.toLocaleString(
+        "es-AR",
+        {
+            style: "currency",
+            currency: "ARS"
+        }
+    );
+}
+
 function calcularTotal() {
+
+    if (!validarCliente()) {
+        return;
+    }
 
     let subtotal = 0;
 
-    const filas = document.querySelectorAll("#tablaProductos tr");
+    const filas =
+        document.querySelectorAll("#tablaProductos tr");
 
     filas.forEach(fila => {
 
         const cantidad =
-            parseFloat(fila.querySelector(".cantidad").value) || 0;
+            parseFloat(
+                fila.querySelector(".cantidad").value
+            ) || 0;
 
         const precioUnitario =
-            parseFloat(fila.querySelector(".precioUnitario").value) || 0;
+            parseFloat(
+                fila.querySelector(".precioUnitario").value
+            ) || 0;
 
-        const totalLinea = cantidad * precioUnitario;
+        const totalLinea =
+            cantidad * precioUnitario;
 
         fila.querySelector(".precioTotal").value =
-            "$ " + totalLinea.toFixed(2);
+            formatoMoneda(totalLinea);
 
         subtotal += totalLinea;
     });
 
-    const iva = subtotal * 0.21;
+    const iva = subtotal * IVA;
     const total = subtotal + iva;
 
     const cuota12 = total / 12;
@@ -28,23 +88,27 @@ function calcularTotal() {
     const total18 = total * 1.75;
     const cuota18 = total18 / 18;
 
-    document.getElementById("subtotal").innerText =
-        "$ " + subtotal.toFixed(2);
+    document.getElementById("subtotal").textContent =
+        formatoMoneda(subtotal);
 
-    document.getElementById("iva").innerText =
-        "$ " + iva.toFixed(2);
+    document.getElementById("iva").textContent =
+        formatoMoneda(iva);
 
-    document.getElementById("total").innerText =
-        "$ " + total.toFixed(2);
+    document.getElementById("total").textContent =
+        formatoMoneda(total);
 
-    document.getElementById("ahora12").innerText =
-        "12 cuotas de $ " + cuota12.toFixed(2);
+    document.getElementById("ahora12").textContent =
+        `12 cuotas de ${formatoMoneda(cuota12)}`;
 
-    document.getElementById("ahora18").innerText =
-        "18 cuotas de $ " + cuota18.toFixed(2);
+    document.getElementById("ahora18").textContent =
+        `18 cuotas de ${formatoMoneda(cuota18)}`;
 }
 
 function exportarPDF() {
+
+    if (!validarCliente()) {
+        return;
+    }
 
     calcularTotal();
 
@@ -55,17 +119,33 @@ function exportarPDF() {
     const cliente =
         document.getElementById("cliente").value;
 
+    const fecha =
+        document.getElementById("fechaEmision")
+        .textContent;
+
     doc.setFontSize(18);
-    doc.text("PRESUPUESTO", 80, 20);
+    doc.text("PRESUPUESTO", 75, 20);
 
     doc.setFontSize(12);
-    doc.text("Cliente: " + cliente, 10, 40);
 
-    let y = 60;
+    doc.text(
+        `Cliente: ${cliente}`,
+        10,
+        40
+    );
 
-    const filas = document.querySelectorAll("#tablaProductos tr");
+    doc.text(
+        `Fecha: ${fecha}`,
+        10,
+        50
+    );
 
-    filas.forEach((fila) => {
+    let y = 70;
+
+    const filas =
+        document.querySelectorAll("#tablaProductos tr");
+
+    filas.forEach(fila => {
 
         const cantidad =
             fila.querySelector(".cantidad").value;
@@ -76,10 +156,10 @@ function exportarPDF() {
         const precio =
             fila.querySelector(".precioUnitario").value;
 
-        if(producto !== ""){
+        if (producto !== "") {
 
             doc.text(
-                `${cantidad} - ${producto} - $${precio}`,
+                `${cantidad} x ${producto} - $${precio}`,
                 10,
                 y
             );
@@ -91,7 +171,8 @@ function exportarPDF() {
     y += 10;
 
     doc.text(
-        document.getElementById("subtotal").innerText,
+        "Subtotal: " +
+        document.getElementById("subtotal").textContent,
         10,
         y
     );
@@ -99,7 +180,8 @@ function exportarPDF() {
     y += 10;
 
     doc.text(
-        document.getElementById("iva").innerText,
+        "IVA: " +
+        document.getElementById("iva").textContent,
         10,
         y
     );
@@ -107,7 +189,24 @@ function exportarPDF() {
     y += 10;
 
     doc.text(
-        document.getElementById("total").innerText,
+        "Total: " +
+        document.getElementById("total").textContent,
+        10,
+        y
+    );
+
+    y += 10;
+
+    doc.text(
+        document.getElementById("ahora12").textContent,
+        10,
+        y
+    );
+
+    y += 10;
+
+    doc.text(
+        document.getElementById("ahora18").textContent,
         10,
         y
     );
