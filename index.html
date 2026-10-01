@@ -1,144 +1,180 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presupuesto</title>
+    <title>MECA Presupuestos</title>
 
     <link rel="stylesheet" href="styles.css">
 
-    <!-- jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
+
 <body>
 
-<div class="contenedor" id="presupuesto">
+    <div class="contenedor" id="presupuesto">
 
-    <h1>MECA PRESUPUESTOS</h1>
+        <h1>MECA PRESUPUESTOS</h1>
 
-    <div class="cliente">
-        <label>Cliente:</label>
-        <input type="text" id="cliente" placeholder="Nombre y Apellido">
-    </div>
+        <div class="datos">
 
-    <table>
-        <thead>
-            <tr>
-                <th>Cantidad</th>
-                <th>Producto</th>
-                <th>Precio Unitario</th>
-                <th>Precio</th>
-            </tr>
-        </thead>
+            <div class="cliente">
+                <label for="cliente">Cliente:</label>
+                <input type="text" id="cliente" placeholder="Nombre y Apellido">
+            </div>
 
-        <tbody id="tablaProductos">
+            <div class="fecha">
+                <label>Fecha de Emisión:</label>
+                <span id="fechaEmision"></span>
+            </div>
 
-            <tr>
-                <td><input type="number" class="cantidad" min="1"></td>
-                <td>
-                    <select class="producto">
-                        <option value="">Seleccionar Producto</option>
-                        <option value="Notebook">Notebook</option>
-                        <option value="Monitor">Monitor</option>
-                        <option value="Impresora">Impresora</option>
-                        <option value="Mouse">Mouse</option>
-                        <option value="Teclado">Teclado</option>
-                    </select>
-                </td>
-                <td><input type="number" class="precioUnitario" min="0"></td>
-                <td><input type="text" class="precioTotal" readonly></td>
-            </tr>
-
-            <tr>
-                <td><input type="number" class="cantidad" min="1"></td>
-                <td>
-                    <select class="producto">
-                        <option value="">Seleccionar Producto</option>
-                        <option value="Notebook">Notebook</option>
-                        <option value="Monitor">Monitor</option>
-                        <option value="Impresora">Impresora</option>
-                        <option value="Mouse">Mouse</option>
-                        <option value="Teclado">Teclado</option>
-                    </select>
-                </td>
-                <td><input type="number" class="precioUnitario" min="0"></td>
-                <td><input type="text" class="precioTotal" readonly></td>
-            </tr>
-
-            <tr>
-                <td><input type="number" class="cantidad" min="1"></td>
-                <td>
-                    <select class="producto">
-                        <option value="">Seleccionar Producto</option>
-                        <option value="Notebook">Notebook</option>
-                        <option value="Monitor">Monitor</option>
-                        <option value="Impresora">Impresora</option>
-                        <option value="Mouse">Mouse</option>
-                        <option value="Teclado">Teclado</option>
-                    </select>
-                </td>
-                <td><input type="number" class="precioUnitario" min="0"></td>
-                <td><input type="text" class="precioTotal" readonly></td>
-            </tr>
-
-            <tr>
-                <td><input type="number" class="cantidad" min="1"></td>
-                <td>
-                    <select class="producto">
-                        <option value="">Seleccionar Producto</option>
-                        <option value="Notebook">Notebook</option>
-                        <option value="Monitor">Monitor</option>
-                        <option value="Impresora">Impresora</option>
-                        <option value="Mouse">Mouse</option>
-                        <option value="Teclado">Teclado</option>
-                    </select>
-                </td>
-                <td><input type="number" class="precioUnitario" min="0"></td>
-                <td><input type="text" class="precioTotal" readonly></td>
-            </tr>
-
-            <tr>
-                <td><input type="number" class="cantidad" min="1"></td>
-                <td>
-                    <select class="producto">
-                        <option value="">Seleccionar Producto</option>
-                        <option value="Notebook">Notebook</option>
-                        <option value="Monitor">Monitor</option>
-                        <option value="Impresora">Impresora</option>
-                        <option value="Mouse">Mouse</option>
-                        <option value="Teclado">Teclado</option>
-                    </select>
-                </td>
-                <td><input type="number" class="precioUnitario" min="0"></td>
-                <td><input type="text" class="precioTotal" readonly></td>
-            </tr>
-
-        </tbody>
-    </table>
-
-    <div class="resumen">
-
-        <div class="cuotas">
-            <p>Ahora 12 (Sin interés): <span id="ahora12">$0</span></p>
-            <p>Ahora 18 (75% interés): <span id="ahora18">$0</span></p>
         </div>
 
-        <div class="totales">
-            <p>Subtotal: <span id="subtotal">$0</span></p>
-            <p>IVA (21%): <span id="iva">$0</span></p>
-            <p>Total: <span id="total">$0</span></p>
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Producto</th>
+                    <th>Precio Unitario</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+
+            <tbody id="tablaProductos">
+
+                <tr>
+                    <td><input type="number" class="cantidad" min="1"></td>
+                    <td>
+                        <select class="producto">
+                            <option value="">Seleccionar Producto</option>
+                            <option>Notebook</option>
+                            <option>Monitor</option>
+                            <option>Impresora</option>
+                            <option>Mouse</option>
+                            <option>Teclado</option>
+                        </select>
+                    </td>
+                    <td><input type="number" class="precioUnitario" min="0"></td>
+                    <td><input type="text" class="precioTotal" readonly></td>
+                </tr>
+
+                <tr>
+                    <td><input type="number" class="cantidad" min="1"></td>
+                    <td>
+                        <select class="producto">
+                            <option value="">Seleccionar Producto</option>
+                            <option>Notebook</option>
+                            <option>Monitor</option>
+                            <option>Impresora</option>
+                            <option>Mouse</option>
+                            <option>Teclado</option>
+                        </select>
+                    </td>
+                    <td><input type="number" class="precioUnitario" min="0"></td>
+                    <td><input type="text" class="precioTotal" readonly></td>
+                </tr>
+
+                <tr>
+                    <td><input type="number" class="cantidad" min="1"></td>
+                    <td>
+                        <select class="producto">
+                            <option value="">Seleccionar Producto</option>
+                            <option>Notebook</option>
+                            <option>Monitor</option>
+                            <option>Impresora</option>
+                            <option>Mouse</option>
+                            <option>Teclado</option>
+                        </select>
+                    </td>
+                    <td><input type="number" class="precioUnitario" min="0"></td>
+                    <td><input type="text" class="precioTotal" readonly></td>
+                </tr>
+
+                <tr>
+                    <td><input type="number" class="cantidad" min="1"></td>
+                    <td>
+                        <select class="producto">
+                            <option value="">Seleccionar Producto</option>
+                            <option>Notebook</option>
+                            <option>Monitor</option>
+                            <option>Impresora</option>
+                            <option>Mouse</option>
+                            <option>Teclado</option>
+                        </select>
+                    </td>
+                    <td><input type="number" class="precioUnitario" min="0"></td>
+                    <td><input type="text" class="precioTotal" readonly></td>
+                </tr>
+
+                <tr>
+                    <td><input type="number" class="cantidad" min="1"></td>
+                    <td>
+                        <select class="producto">
+                            <option value="">Seleccionar Producto</option>
+                            <option>Notebook</option>
+                            <option>Monitor</option>
+                            <option>Impresora</option>
+                            <option>Mouse</option>
+                            <option>Teclado</option>
+                        </select>
+                    </td>
+                    <td><input type="number" class="precioUnitario" min="0"></td>
+                    <td><input type="text" class="precioTotal" readonly></td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="resumen">
+
+            <div class="planes">
+
+                <p>
+                    <strong>Ahora 12 (Sin interés):</strong>
+                    <span id="ahora12">$ 0.00</span>
+                </p>
+
+                <p>
+                    <strong>Ahora 18 (75% interés):</strong>
+                    <span id="ahora18">$ 0.00</span>
+                </p>
+
+            </div>
+
+            <div class="totales">
+
+                <p>
+                    <strong>Subtotal:</strong>
+                    <span id="subtotal">$ 0.00</span>
+                </p>
+
+                <p>
+                    <strong>IVA (21%):</strong>
+                    <span id="iva">$ 0.00</span>
+                </p>
+
+                <p>
+                    <strong>Total:</strong>
+                    <span id="total">$ 0.00</span>
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="botones">
+            <button onclick="calcularTotal()">Calcular Total</button>
+            <button onclick="window.print()">Imprimir Presupuesto</button>
+            <button onclick="exportarPDF()">Exportar PDF</button>
         </div>
 
     </div>
 
-    <div class="botones">
-        <button onclick="calcularTotal()">Calcular Total</button>
-        <button onclick="window.print()">Imprimir Presupuesto</button>
-        <button onclick="exportarPDF()">Exportar PDF</button>
-    </div>
+    <script src="script.js"></script>
 
-</div>
-
-<script src="script.js"></script>
 </body>
+
 </html>
